@@ -22,13 +22,15 @@ class Counter
     {
         this._counter++;
         this.update();
+        return true;
     }
     
     decrease()
     {
-        if(this.counter == 0) return;
+        if(this._counter == 0) return false;
         this._counter--;
         this.update();
+        return true;
     }
 
     update()

@@ -7,53 +7,72 @@ const counter = new Counter(outputElem);
 
 repeatingClickEvent(btnDecrease, () =>
 {
-    counter.decrease();
+    return counter.decrease();
 });
 
 repeatingClickEvent(btnIncrease, () =>
 {
-    counter.increase();
+    return counter.increase();
 });
 
 btnReset.addEventListener('click', () =>
 {
+    if(counter.counter == 0) return;
     counter.reset();
-    animateOutput(0.25);
+    animateOutput();
 });
-
-function repeatingClickEvent(elem, callback, timeInterval = 100)
-{
-    let interval;
-    let timeout;
-    elem.addEventListener('mousedown', () =>
-    {
-        callback();
-        if(counter.counter == 0)
-        animateOutput(0.25);
-    });
-    elem.addEventListener('mousedown', () =>
-    {
-        timeout = setTimeout(() =>
-        {
-            interval = setInterval(() => {
-                callback();
-                animateOutput(0.05);
-            }, timeInterval);
-        },500);
-        
-    });
-
-    elem.addEventListener('mouseup', () =>
-    {
-        clearTimeout(timeout);
-        clearInterval(interval);
-    });
-}
 
 function animateOutput(duration)
 {
     outputElem.style.animation = 'none';
     outputElem.offsetHeight;
     outputElem.style.animation = null;
-    outputElem.style.animationDuration = `${duration}s`;
+
+    let prevDuration = getComputedStyle(outputElem).animationDuration.slice(0, -1);
+    outputElem.style.animationDuration = `${duration ?? prevDuration}s`;
+}
+
+function repeatingClickEvent(elem, callback)
+{
+    let interval;
+    let timeout;
+
+    function singleClickListener()
+    {
+        if(!callback()) return;
+        animateOutput();
+    }
+
+    elem.addEventListener('click', singleClickListener);
+
+
+    function continuosClickListener()
+    {
+        timeout = setTimeout(() =>
+        {
+            interval = setInterval(() => {
+                if(!callback()) return;
+                animateOutput(0.05);
+            }, 100);
+
+            elem.removeEventListener('click', singleClickListener); 
+        },500);
+    }
+
+    elem.addEventListener('mousedown', continuosClickListener);
+    elem.addEventListener('touchstart', continuosClickListener);
+
+    function stopClicking()
+    {
+        clearTimeout(timeout);
+        clearInterval(interval);
+
+        setTimeout(() =>
+            elem.addEventListener('click', singleClickListener)
+        , 100);
+    }
+
+    elem.addEventListener('mouseup', stopClicking);
+    elem.addEventListener('touchend', stopClicking);
+    elem.addEventListener('mouseleave', stopClicking);
 }

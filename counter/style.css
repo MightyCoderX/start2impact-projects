@@ -15,17 +15,28 @@ body
     align-content: center;
     justify-content: center;
     align-items: center;
-    grid-template-columns: repeat(3, 3rem);
-    grid-template-rows: repeat(2, 3rem);
+    grid-template-columns: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
     background-image: linear-gradient(to right, #001433, #00378a);
-    gap: 1rem;
+    row-gap: 4vmax;
+    column-gap: 2vmax;
+    overflow: hidden;
+    padding-top: 12vh;
+}
+
+@media only screen and (max-width: 700px)
+{
+    body
+    {
+        padding-top: 0;
+        column-gap: 1vmax;
+    }
 }
 
 .button
 {
-    width: 3rem;
-    height: 3rem;
-    font-size: 2rem;
+    max-height: fit-content;
+    font-size: 10vmax;
     border: none;
     background-color: transparent;
     font-family: sans-serif;
@@ -35,6 +46,9 @@ body
     transition-duration: 0.2s;
     transition-timing-function: ease;
     cursor: pointer;
+    line-height: 1;
+    display: block;
+    user-select: none;
 }
 
 .button:hover
@@ -46,9 +60,13 @@ body
 .output
 {
     justify-self: center;
-    color: #fff;
-    font-size: 2rem;
-    animation: change 0.25s ease-out;
+    color: #ddd;
+    font-size: 10vmax;
+    animation: change 0.3s ease;
+    line-height: 1;
+    min-width: 25vmax;
+    text-align: center;
+    /* mix-blend-mode: color-dodge; */
 }
 
 .button.reset
