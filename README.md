@@ -1,5 +1,4 @@
 # Start2Impact Projects
-
 A repository to store my start2impact projects
 
 
