@@ -1,0 +1,74 @@
+*,
+*::before,
+*::after
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body
+{
+    display: grid;
+    min-height: 100vh;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 3rem);
+    grid-template-rows: repeat(2, 3rem);
+    background-image: linear-gradient(to right, #001433, #00378a);
+    gap: 1rem;
+}
+
+.button
+{
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+    font-family: sans-serif;
+    color: #fff;
+    opacity: 0.5;
+    transition-property: opacity, font-size;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    cursor: pointer;
+}
+
+.button:hover
+{
+    opacity: 1;
+    
+}
+
+.output
+{
+    justify-self: center;
+    color: #fff;
+    font-size: 2rem;
+    animation: change 0.25s ease-out;
+}
+
+.button.reset
+{
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
+@keyframes change
+{
+    from
+    {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    to
+    {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
