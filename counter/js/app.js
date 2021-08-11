@@ -45,7 +45,6 @@ function repeatingClickEvent(elem, callback)
 
     elem.addEventListener('click', singleClickListener);
 
-
     function continuosClickListener()
     {
         timeout = setTimeout(() =>
@@ -55,8 +54,8 @@ function repeatingClickEvent(elem, callback)
                 animateOutput(0.05);
             }, 100);
 
-            elem.removeEventListener('click', singleClickListener); 
-        },500);
+            elem.removeEventListener('click', singleClickListener);
+        }, 500);
     }
 
     elem.addEventListener('mousedown', continuosClickListener);
