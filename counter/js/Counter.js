@@ -20,6 +20,7 @@ class Counter
 
     increase()
     {
+        if(this._counter == 9999) return false;
         this._counter++;
         this.update();
         return true;
