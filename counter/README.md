@@ -5,7 +5,7 @@ A very simple counter which allows you to increment/decrement a number output, b
 <br>
 <br>
 
-![image](https://user-images.githubusercontent.com/36588044/130155980-1be9e190-0b8e-4879-ab71-9530a5c1766b.png)
+![Counter App Screenshot](https://user-images.githubusercontent.com/36588044/130158892-9d71cf64-2931-4351-b975-035b53c8ac98.png)
 
 ## Features
 - Decrement Button
