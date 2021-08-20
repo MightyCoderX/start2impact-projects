@@ -1,11 +1,16 @@
-<h1 align="center">Counter</h1>
-A very simple counter which allows you to increment/decrement a number output, by pressing on plus/minus buttons.
+<h1 align="center"> Counter </h1>
+<p align="center">
+  A very simple counter which allows you to increment/decrement <br>
+  a number output. With a pretty cool design!
+</p>
 
 <br>
 <br>
 <br>
 
-![Counter App Screenshot](https://user-images.githubusercontent.com/36588044/130158892-9d71cf64-2931-4351-b975-035b53c8ac98.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/36588044/130158892-9d71cf64-2931-4351-b975-035b53c8ac98.png" alt="Counter App Screenshot">
+</p>
 
 ## Features
 - Decrement Button
