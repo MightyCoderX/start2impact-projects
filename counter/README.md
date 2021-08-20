@@ -1,11 +1,8 @@
 <h1 align="center"> Counter </h1>
-<p align="center">
-  A very simple counter which allows you to increment/decrement <br>
-  a number output. With a pretty cool design!
-</p>
+<h3 align="center">
+  A very simple counter, featuring a pretty slick design!
+</h3>
 
-<br>
-<br>
 <br>
 
 <p align="center">
