@@ -15,14 +15,6 @@ module.exports = {
             {
                 test: /\.html$/i,
                 loader: 'html-loader',
-            },
-            {
-                test: /\.file.js$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.file.css$/i,
-                type: "asset/resource",
             }
         ],
     },

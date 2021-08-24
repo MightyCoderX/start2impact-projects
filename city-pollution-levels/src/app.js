@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+const _ = require('lodash');
 
 const API_TOKEN = process.env.API_TOKEN;
 
@@ -10,7 +10,7 @@ function getPollutionFromCoords(lat, lon)
     .then(res => res.json())
     .then(json =>
     {
-        console.log(get(json, 'data.city.name'));
+        console.log(_.get(json, 'data.city.name'));
     });
 }
 
@@ -19,6 +19,23 @@ function getCoordinates() {
       navigator.geolocation.getCurrentPosition(resolve, reject);
     });
 }
+
+const formCoords = document.getElementById('formCoords');
+
+formCoords.addEventListener('submit', e =>
+{
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    
+    const coordsString = formData.get('coords');
+    const parts = coordsString.split(' ');
+
+    const lat = +parts[0];
+    const lon = +parts[1];
+
+    getPollutionFromCoords(lat, lon);
+});
 
 getCoordinates()
 .then(pos =>
