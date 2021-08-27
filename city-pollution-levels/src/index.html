@@ -6,16 +6,23 @@
         <title>City Pollution Levels</title>
         
         <link rel="stylesheet" href="style.css">
+        <script src="coords-input.js" defer></script>
     </head>
     <body>
         <header>
             <h1>City Pollution Levels</h1>
             <form class="coords" id="formCoords">
-                <label for="coords">Coords</label>
-                <input type="text" name="coords" id="coords" required placeholder="<Latitude> <Longitude>">
+                <label for="lat">Latitude</label>
+                <label for="lon">Longitude</label>
+
+                <input type="text" name="lat" id="lat" required placeholder="0,0000">
+                <input type="text" name="lon" id="lon" required placeholder="0,0000">
+
+                <button type="reset">X</button>
             </form>
         </header>
         <main>
+
         </main>
     </body>
 </html>
