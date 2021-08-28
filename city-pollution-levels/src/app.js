@@ -1,31 +1,18 @@
 const _ = require('lodash');
 
+const { PollutionAPI } = require('./pollution-api');
+const { getCurrentPosition } = require('./utils');
+
 const API_TOKEN = process.env.API_TOKEN;
+
+const api = new PollutionAPI(API_TOKEN);
 
 const latitudeRegex =  /^[-+]?([1-8]?\d([\.,]\d+)?|90(\.0+)?)$/gi;
 const longitudeRegex =  /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))([\.,]\d+)?)$/gi;
 
-function getPollutionFromCoords(lat, lon)
-{
-    const URL = `https://api.waqi.info/feed/geo:${lat};${lon}/?token=${API_TOKEN}`;
-    
-    fetch(URL)
-    .then(res => res.json())
-    .then(json =>
-    {
-        console.log(_.get(json, 'data.city.name'));
-    });
-}
+const formSearchByCoords = document.getElementById('formSearchByCoords');
 
-function getCoordinates() {
-    return new Promise(function(resolve, reject) {
-      navigator.geolocation.getCurrentPosition(resolve, reject);
-    });
-}
-
-const formCoords = document.getElementById('formCoords');
-
-formCoords.addEventListener('submit', e =>
+formSearchByCoords.addEventListener('submit', e =>
 {
     e.preventDefault();
     console.log(e.type);
@@ -37,12 +24,28 @@ formCoords.addEventListener('submit', e =>
 
     console.log("Submitted Coords: ", lat, lon);
 
-    getPollutionFromCoords(lat, lon);
+    api.getDataByCoords(lat, lon);
 });
 
-getCoordinates()
+const formSearchByCity = document.getElementById('formSearchByCity');
+
+formSearchByCity.addEventListener('submit', e =>
+{
+    e.preventDefault();
+    console.log(e.type);
+
+    const formData = new FormData(e.target);
+
+    const city = formData.get('city');
+
+    console.log("Submitted City Name: ", city);
+
+    api.getDataByCity(city);
+});
+
+getCurrentPosition()
 .then(pos =>
 {
     const { latitude: lat, longitude: lon } = pos.coords;
-    getPollutionFromCoords(lat, lon);
+    api.getDataByCoords(lat, lon);
 });

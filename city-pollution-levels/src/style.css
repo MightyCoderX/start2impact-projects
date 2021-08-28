@@ -31,7 +31,7 @@ header h1
     font-size: 3rem;
 }
 
-form.coords
+form
 {
     padding: 1.5rem;
     display: grid;
@@ -42,15 +42,22 @@ form.coords
     align-content: center;
     justify-content: center;
     row-gap: 1rem;
+    font-size: 1.6rem;
 }
 
-form.coords label
+form input[type="text"]
 {
-    font-size: 1.8rem;
+    padding: .3em;
+    font-size: 1.3rem;
+    max-width: 100px;
+}
+
+form.search-by-coords label
+{
     grid-row: 1 / 2;
 }
 
-form.coords button[type="reset"]
+form.search-by-coords button[type="reset"]
 {
     grid-column: 1 / -1;
     width: 50%;
@@ -59,11 +66,4 @@ form.coords button[type="reset"]
     background: none;
     border: none;
     cursor: pointer;
-}
-
-form.coords input
-{
-    padding: .3em;
-    font-size: 1.3rem;
-    max-width: 100px;
 }

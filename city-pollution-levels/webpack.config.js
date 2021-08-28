@@ -1,6 +1,8 @@
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const webpack = require('webpack');
+const dotenv = require('dotenv');
 
 module.exports = {
     mode: 'development',
@@ -19,8 +21,8 @@ module.exports = {
         ],
     },
     plugins: [
-        new Dotenv({
-            ignoreStub: true
+        new webpack.DefinePlugin({
+            'process.env': JSON.stringify(dotenv.config().parsed)
         }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'

@@ -1,8 +1,8 @@
 const coordsRegex = /^[-+]?([1-8]?\d([\.,]\d+)?|90(\.0+)?)\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))([\.,]\d+)?)$/gi;
 
-const formCoords = document.getElementById('formCoords');
+const formSearchByCoords = document.getElementById('formSearchByCoords');
 
-const coordInputs = formCoords.querySelectorAll('input');
+const coordInputs = formSearchByCoords.querySelectorAll('input');
 
 coordInputs.forEach(input =>
 {
@@ -10,14 +10,14 @@ coordInputs.forEach(input =>
     {
         const clipboardText = e.clipboardData.getData('text');
         fillCoords(e, clipboardText);
-        formCoords.dispatchEvent(new SubmitEvent('submit'));
+        formSearchByCoords.dispatchEvent(new SubmitEvent('submit'));
     });
 
     input.addEventListener('keydown', e =>
     {
         if(e.code == 'Enter')
         {
-            formCoords.dispatchEvent(new SubmitEvent('submit'));
+            formSearchByCoords.dispatchEvent(new SubmitEvent('submit'));
         }
     });
 });
