@@ -64,7 +64,7 @@ form
 
 form :where(input[type="text"], input[type="search"])
 {
-    padding: 0.8em;
+    padding: 1rem;
     outline: none;
     font-size: 1.4rem;
     border: 2px solid #777;
@@ -84,8 +84,10 @@ form.search-by-coords .coords-input
     grid-column: 1 / -1;
     border: 2px solid #777;
     border-radius: 0.5rem;
-    padding-right: 0.8rem;
+    padding-right: 1rem;
     transition: border-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
 }
 
 form.search-by-coords .coords-input:focus-within
@@ -115,6 +117,7 @@ form.search-by-coords button[type="reset"]
     cursor: pointer;
     font-size: 2rem;
     font-family: monospace;
+    line-height: 0;
 }
 
 form.search-by-city

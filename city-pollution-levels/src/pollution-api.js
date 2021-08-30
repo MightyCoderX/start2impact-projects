@@ -58,12 +58,12 @@ class PollutionFeed
     get pollutionLevel()
     {
         const pollutionLevel = {
-            '0..50': 'Good',
-            '51..100': 'Moderate',
-            '101..150': 'Unhealthy for Sensitive Groups',
-            '151..200': 'Unhealthy',
-            '201..300': 'Very Unhealty',
-            '300..': 'Hazardous'
+            '0..50': PollutionLevel.GOOD,
+            '51..100': PollutionLevel.MODERATE,
+            '101..150': PollutionLevel.UNHEALTHY_FOR_SENSITIVE_GROUPS,
+            '151..200': PollutionLevel.UNHEALTHY,
+            '201..300': PollutionLevel.VERY_UNHEALTHY,
+            '300..': PollutionLevel.HAZARDOUS
         };
 
         for(let range in pollutionLevel)
@@ -119,5 +119,21 @@ class City
     get url()
     {
         return this._url;
+    }
+}
+
+class PollutionLevel
+{
+    static GOOD = new this('Good', 'green');
+    static MODERATE = new this('Moderate', 'yellow');
+    static UNHEALTHY_FOR_SENSITIVE_GROUPS = new this('Unhealthy for Sensitive Groups', 'orange');
+    static UNHEALTHY = new this('Unhealthy', 'red');
+    static VERY_UNHEALTHY = new this('Very Unhealthy', 'purple');
+    static HAZARDOUS = new this('Hazardous', 'darkred');
+
+    constructor(name, color)
+    {
+        this.name = name;
+        this.color = color;
     }
 }

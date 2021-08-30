@@ -32,9 +32,17 @@
             <template id="stationData">
                 <div class="station-data-container">
                     <h2 class="station-name"></h2>
-                    <p class="aqi-field">AQI: <span class="aqi-value"></span></p>
-                    <div class="pollutants">
-                        
+                    <div class="aqi-display">
+                        <p class="aqi-field">AQI: <span class="aqi-value"></span></p>
+                        <p class="aqi-level"></p>
+                    </div>
+                    <div class="pollutants-grid">
+                        <template id="pollutantCard">
+                            <div class="pollutant-card">
+                                <h3 class="pollutant-name"></h3>
+                                <p class="current-pollutant-value"></p>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </template>
