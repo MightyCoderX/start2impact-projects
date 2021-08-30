@@ -11,22 +11,33 @@
     <body>
         <header>
             <h1>City Pollution Levels</h1>
-            <form class="search-by-coords" id="formSearchByCoords">
-                <label for="lat">Latitude</label>
-                <label for="lon">Longitude</label>
-
-                <input type="text" name="lat" id="lat" required placeholder="0,0000">
-                <input type="text" name="lon" id="lon" required placeholder="0,0000">
-
-                <button type="reset">x</button>
-            </form>
-            <form class="search-by-city" id="formSearchByCity">
-                <label for="city">City</label>
-                <input type="search" name="city" id="city" required placeholder="City name here...">
-            </form>
+            
+            <div class="filter-forms">
+                <form class="search-by-city" id="formSearchByCity">
+                    <label for="city">City</label>
+                    <input type="search" name="city" id="city" required placeholder="City name here...">
+                </form>
+                <form class="search-by-coords" id="formSearchByCoords">
+                    <label for="lat">Latitude</label>
+                    <label for="lon">Longitude</label>
+                    <div class="coords-input">
+                        <input type="text" name="lat" id="lat" required placeholder="0,0000" autocomplete="off">
+                        <input type="text" name="lon" id="lon" required placeholder="0,0000" autocomplete="off">
+                        <button type="reset">x</button>
+                    </div>
+                </form>
+            </div>
         </header>
         <main>
-
+            <template id="stationData">
+                <div class="station-data-container">
+                    <h2 class="station-name"></h2>
+                    <p class="aqi-field">AQI: <span class="aqi-value"></span></p>
+                    <div class="pollutants">
+                        
+                    </div>
+                </div>
+            </template>
         </main>
     </body>
 </html>
