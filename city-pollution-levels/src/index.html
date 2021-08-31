@@ -4,9 +4,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>City Pollution Levels</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         
-        <link rel="stylesheet" href="style.css">
-        <script src="coords-input.js" defer></script>
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/coords-input.js" defer></script>
     </head>
     <body>
         <header>
@@ -29,18 +32,18 @@
             </div>
         </header>
         <main>
-            <template id="stationData">
-                <div class="station-data-container">
+            <template id="stationReport">
+                <div class="station-report-container">
                     <h2 class="station-name"></h2>
-                    <div class="aqi-display">
-                        <p class="aqi-field">AQI: <span class="aqi-value"></span></p>
+                    <div class="aqi-display" title="Air Quality Index">
+                        <p class="aqi-field">AQI - <span class="aqi-value"></span></p>
                         <p class="aqi-level"></p>
                     </div>
                     <div class="pollutants-grid">
                         <template id="pollutantCard">
                             <div class="pollutant-card">
                                 <h3 class="pollutant-name"></h3>
-                                <p class="current-pollutant-value"></p>
+                                <p class="pollutant-value"></p>
                             </div>
                         </template>
                     </div>

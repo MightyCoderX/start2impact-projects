@@ -1,7 +1,7 @@
 const _ = require('lodash');
 
-const { PollutionAPI } = require('./pollution-api');
-const { getCurrentPosition } = require('./utils');
+const { PollutionAPI } = require('./js/pollution-api');
+const { getCurrentPosition } = require('./js/utils');
 
 const API_TOKEN = process.env.API_TOKEN;
 
@@ -43,9 +43,35 @@ formSearchByCity.addEventListener('submit', e =>
     api.getDataByCity(city);
 });
 
+function generateStationReport(pollutionFeed)
+{
+    const stationReportTemplate = document.getElementById('stationReport');
+    const newStationReport = stationReportTemplate.content.cloneNode(true);
+
+    newStationReport.querySelector('.station-name').innerText = pollutionFeed.city.name;
+    newStationReport.querySelector('.aqi-display').style.borderColor = pollutionFeed.pollutionLevel.color;
+    newStationReport.querySelector('.aqi-value').innerText = pollutionFeed.aqi;
+    newStationReport.querySelector('.aqi-level').innerText = pollutionFeed.pollutionLevel.name;
+    newStationReport.querySelector('.aqi-level').style.color = pollutionFeed.pollutionLevel.color;
+    
+    const pollutantsGrid = newStationReport.querySelector('.pollutants-grid');
+
+    const pollutantCardTemplate = newStationReport.getElementById('pollutantCard')
+    
+    pollutionFeed.iaqi.forEach(aqiValue =>
+    {
+        const newPollutantCard = pollutantCardTemplate.content.cloneNode(true);
+        newPollutantCard.querySelector('.pollutant-name').innerHTML = aqiValue.name;
+        newPollutantCard.querySelector('.pollutant-value').innerText = aqiValue.value;
+        pollutantsGrid.appendChild(newPollutantCard);
+    });
+    document.body.querySelector('main').appendChild(newStationReport);
+}
+
 getCurrentPosition()
-.then(pos =>
+.then(async pos =>
 {
     const { latitude: lat, longitude: lon } = pos.coords;
-    api.getDataByCoords(lat, lon);
+    let feed = await api.getDataByCoords(lat, lon);
+    generateStationReport(feed);
 });

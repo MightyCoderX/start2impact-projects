@@ -40,10 +40,58 @@ class PollutionFeed
         this._city = new City(city);
         this._dominentpol = dominentpol;
         
-        this._iaqi = {};
-        for(let pol in iaqi)
+        this._pollutants = [];
+        this._weather = [];
+
+        for(let key in iaqi)
         {
-            this._iaqi[pol] = iaqi[pol].v;
+            const value = iaqi[key].v;
+            
+            const aqiValue = {
+                id: key,
+                name: key,
+                fullName: this.name,
+                description: key,
+                value
+            };
+
+            switch (key)
+            {
+                case 'h':
+                    aqiValue.name = 'Humidity'
+                    aqiValue.description = 'Humidity measured in percentage (%)'
+                    break;
+
+                case 'p':
+                    aqiValue.name = 'Pressure';
+                    break;
+
+                case 't':
+                    aqiValue.name = 'Temperature';
+                    break;
+
+                case 'w':
+                    aqiValue.name = 'Wind';
+                    break;
+
+                case 'co':
+                    aqiValue.name = key.toUpperCase();
+                    break;
+
+                case 'no2':
+                    aqiValue.name = 'NO<sub>2</sub>';
+                    break;
+
+                case 'o3':
+                    aqiValue.name = 'O<sub>3</sub>';
+                    break;
+
+                case 'o3':
+                    aqiValue.name = 'O<sub>3</sub>';
+                    break;
+            }
+
+            this._iaqi.push(aqiValue);
         }
 
         this._time = new Date(time.iso);

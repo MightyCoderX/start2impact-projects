@@ -1,0 +1,69 @@
+{
+    "co":
+    {
+        "name": "CO",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Carbon Monoxide",
+        "type": "gas"
+    },
+    "h":
+    {
+        "name": "Humidity",
+        "unit": "%",
+        "description": "Humidity in percentage",
+        "type": "wheather"
+    },
+    "no2":
+    {
+        "name": "NO<sub>2</sub>",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Nitrogen Dioxide",
+        "type": "gas"
+    },
+    "o3":
+    {
+        "name": "O<sub>3</sub>",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Ozone",
+        "type": "gas"
+    },
+    "p":
+    {
+        "name": "Pressure",
+        "unit": "hPa",
+        "description": "Atmosferic Pressure in hPa"
+    },
+    "pm10":
+    {
+        "name": "PM10",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Particulate Matter"
+    },
+    "pm25":
+    {
+        "name": "PM5",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Particulate Matter"
+    },
+    "so2":
+    {
+        "name": "SO<sub>2</sub>",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Sulfur Dioxide",
+        "type": "gas"
+    },
+    "t":
+    {
+        "name": "Temp.",
+        "unit": "°C",
+        "description": "Temperature in degrees Celsius",
+        "type": "wheather"
+    },
+    "w":
+    {
+        "name": "Wind",
+        "unit": "",
+        "description": "Wind something",
+        "type": "wheather"
+    }
+}
