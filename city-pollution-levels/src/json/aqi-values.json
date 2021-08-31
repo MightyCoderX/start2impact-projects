@@ -1,24 +1,17 @@
 {
-    "co":
+    "pm25":
     {
-        "name": "CO",
+        "name": "PM<sub>2.5</sub>",
         "unit": "µg/m<sup>3</sup>",
-        "description": "Carbon Monoxide",
-        "type": "gas"
+        "description": "Fine Particulate Matter",
+        "type": "pm"
     },
-    "h":
+    "pm10":
     {
-        "name": "Humidity",
-        "unit": "%",
-        "description": "Humidity in percentage",
-        "type": "wheather"
-    },
-    "no2":
-    {
-        "name": "NO<sub>2</sub>",
+        "name": "PM<sub>10</sub>",
         "unit": "µg/m<sup>3</sup>",
-        "description": "Nitrogen Dioxide",
-        "type": "gas"
+        "description": "Respirable Particulate Matter",
+        "type": "pm"
     },
     "o3":
     {
@@ -27,23 +20,12 @@
         "description": "Ozone",
         "type": "gas"
     },
-    "p":
+    "no2":
     {
-        "name": "Pressure",
-        "unit": "hPa",
-        "description": "Atmosferic Pressure in hPa"
-    },
-    "pm10":
-    {
-        "name": "PM10",
+        "name": "NO<sub>2</sub>",
         "unit": "µg/m<sup>3</sup>",
-        "description": "Particulate Matter"
-    },
-    "pm25":
-    {
-        "name": "PM5",
-        "unit": "µg/m<sup>3</sup>",
-        "description": "Particulate Matter"
+        "description": "Nitrogen Dioxide",
+        "type": "gas"
     },
     "so2":
     {
@@ -52,18 +34,53 @@
         "description": "Sulfur Dioxide",
         "type": "gas"
     },
+    "co":
+    {
+        "name": "CO",
+        "unit": "µg/m<sup>3</sup>",
+        "description": "Carbon Monoxide",
+        "type": "gas"
+    },
     "t":
     {
         "name": "Temp.",
         "unit": "°C",
         "description": "Temperature in degrees Celsius",
-        "type": "wheather"
+        "type": "weather"
+    },
+    "p":
+    {
+        "name": "Pressure",
+        "unit": "hPa",
+        "description": "Atmosferic Pressure in hPa",
+        "type": "weather"
+    },
+    "h":
+    {
+        "name": "Humidity",
+        "unit": "%",
+        "description": "Humidity percentage",
+        "type": "weather"
     },
     "w":
     {
         "name": "Wind",
+        "unit": "m/s",
+        "description": "Wind Speed in m/s",
+        "type": "weather"
+    },
+    "wg":
+    {
+        "name": "wg",
         "unit": "",
-        "description": "Wind something",
-        "type": "wheather"
+        "description": "",
+        "type": ""
+    },
+    "dew":
+    {
+        "name": "Dew",
+        "unit": "°C",
+        "description": "Dew Point in degrees Celsius",
+        "type": "weather"
     }
 }

@@ -133,8 +133,9 @@ form.search-by-city label
 
 main
 {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
+    padding: 0 2rem;
 }
 
 .station-report-container
@@ -188,7 +189,7 @@ main
 .pollutants-grid
 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
     align-content: center;
 }

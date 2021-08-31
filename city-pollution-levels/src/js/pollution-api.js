@@ -27,7 +27,14 @@ export class PollutionAPI
     {
         const json = await (await fetch(this.baseURL + path)).json();
 
-        return new PollutionFeed(json.data);
+        try
+        {
+            return new PollutionFeed(json.data);
+        }
+        catch(err)
+        {
+            return json;
+        }
     }
 }
 
@@ -43,56 +50,40 @@ class PollutionFeed
         this._pollutants = [];
         this._weather = [];
 
+        const aqiValues = require('../json/aqi-values.json');
+
         for(let key in iaqi)
         {
-            const value = iaqi[key].v;
-            
-            const aqiValue = {
-                id: key,
-                name: key,
-                fullName: this.name,
-                description: key,
-                value
-            };
-
-            switch (key)
+            console.log(key, aqiValues[key]);
+            const aqiValue = aqiValues[key];
+            aqiValue.value = iaqi[key].v;
+            if(aqiValue.type == 'pm' || aqiValue.type == 'gas')
             {
-                case 'h':
-                    aqiValue.name = 'Humidity'
-                    aqiValue.description = 'Humidity measured in percentage (%)'
-                    break;
-
-                case 'p':
-                    aqiValue.name = 'Pressure';
-                    break;
-
-                case 't':
-                    aqiValue.name = 'Temperature';
-                    break;
-
-                case 'w':
-                    aqiValue.name = 'Wind';
-                    break;
-
-                case 'co':
-                    aqiValue.name = key.toUpperCase();
-                    break;
-
-                case 'no2':
-                    aqiValue.name = 'NO<sub>2</sub>';
-                    break;
-
-                case 'o3':
-                    aqiValue.name = 'O<sub>3</sub>';
-                    break;
-
-                case 'o3':
-                    aqiValue.name = 'O<sub>3</sub>';
-                    break;
+                this._pollutants.push(aqiValue);
             }
-
-            this._iaqi.push(aqiValue);
+            else if(aqiValue.type == 'weather')
+            {
+                this._weather.push(aqiValue);
+            }
         }
+
+        // fetch('../json/api-values')
+        // .then(res => res.json())
+        // .then(apiValues =>
+        // {
+        //     for(let key of iaqi)
+        //     {
+        //         const value = apiValues[key];
+        //         if(value.type == 'pm' || value.type == 'gas')
+        //         {
+        //             this._pollutants.push(value);
+        //         }
+        //         else if(value.type == 'weather')
+        //         {
+        //             this._weather.push(value);
+        //         }
+        //     }
+        // });
 
         this._time = new Date(time.iso);
         console.log(this);
@@ -134,9 +125,14 @@ class PollutionFeed
         return this._dominentpol;
     }
 
-    get iaqi()
+    get pollutants()
     {
-        return this._iaqi;
+        return this._pollutants;
+    }
+
+    get weather()
+    {
+        return this._weather;
     }
 
     get time()

@@ -12,7 +12,7 @@ const longitudeRegex =  /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))([\.,]\d+)?)$/
 
 const formSearchByCoords = document.getElementById('formSearchByCoords');
 
-formSearchByCoords.addEventListener('submit', e =>
+formSearchByCoords.addEventListener('submit', async e =>
 {
     e.preventDefault();
     console.log(e.type);
@@ -24,12 +24,13 @@ formSearchByCoords.addEventListener('submit', e =>
 
     console.log("Submitted Coords: ", lat, lon);
 
-    api.getDataByCoords(lat, lon);
+    const feed = await api.getDataByCoords(lat, lon);
+    generateStationReport(feed);
 });
 
 const formSearchByCity = document.getElementById('formSearchByCity');
 
-formSearchByCity.addEventListener('submit', e =>
+formSearchByCity.addEventListener('submit', async e =>
 {
     e.preventDefault();
     console.log(e.type);
@@ -40,11 +41,24 @@ formSearchByCity.addEventListener('submit', e =>
 
     console.log("Submitted City Name: ", city);
 
-    api.getDataByCity(city);
+    const feed = await api.getDataByCity(city);
+    
+    generateStationReport(feed);
 });
 
 function generateStationReport(pollutionFeed)
 {
+    const mainElem = document.querySelector('main');
+    
+    if(pollutionFeed.status == 'error')
+    {
+        console.log(pollutionFeed);
+        mainElem.innerHTML = pollutionFeed.data;
+        return;
+    }
+
+    mainElem.querySelector('.station-report-container')?.remove?.();
+
     const stationReportTemplate = document.getElementById('stationReport');
     const newStationReport = stationReportTemplate.content.cloneNode(true);
 
@@ -58,14 +72,18 @@ function generateStationReport(pollutionFeed)
 
     const pollutantCardTemplate = newStationReport.getElementById('pollutantCard')
     
-    pollutionFeed.iaqi.forEach(aqiValue =>
+    const pollutants = pollutionFeed.pollutants;
+    const weather = pollutionFeed.weather;
+
+    [...pollutants, ...weather].forEach(aqiValue =>
     {
         const newPollutantCard = pollutantCardTemplate.content.cloneNode(true);
         newPollutantCard.querySelector('.pollutant-name').innerHTML = aqiValue.name;
-        newPollutantCard.querySelector('.pollutant-value').innerText = aqiValue.value;
+        newPollutantCard.querySelector('.pollutant-value').innerHTML = aqiValue.value + " " + aqiValue.unit;
         pollutantsGrid.appendChild(newPollutantCard);
     });
-    document.body.querySelector('main').appendChild(newStationReport);
+
+    mainElem.appendChild(newStationReport);
 }
 
 getCurrentPosition()
