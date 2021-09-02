@@ -54,7 +54,6 @@ class PollutionFeed
 
         for(let key in iaqi)
         {
-            console.log(key, aqiValues[key]);
             const aqiValue = aqiValues[key];
             aqiValue.value = iaqi[key].v;
             if(aqiValue.type == 'pm' || aqiValue.type == 'gas')

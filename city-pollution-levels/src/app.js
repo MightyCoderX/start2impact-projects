@@ -12,6 +12,14 @@ const longitudeRegex =  /^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))([\.,]\d+)?)$/
 
 const formSearchByCoords = document.getElementById('formSearchByCoords');
 
+getCurrentPosition()
+.then(async pos =>
+{
+    const { latitude: lat, longitude: lon } = pos.coords;
+    let feed = await api.getDataByCoords(lat, lon);
+    generateStationReport(feed);
+});
+
 formSearchByCoords.addEventListener('submit', async e =>
 {
     e.preventDefault();
@@ -25,6 +33,7 @@ formSearchByCoords.addEventListener('submit', async e =>
     console.log("Submitted Coords: ", lat, lon);
 
     const feed = await api.getDataByCoords(lat, lon);
+    formSearchByCity.querySelector('#city').value = feed.city.name;
     generateStationReport(feed);
 });
 
@@ -42,7 +51,8 @@ formSearchByCity.addEventListener('submit', async e =>
     console.log("Submitted City Name: ", city);
 
     const feed = await api.getDataByCity(city);
-    
+    formSearchByCoords.querySelector('#lat').value = feed.city.coords.latitude;
+    formSearchByCoords.querySelector('#lon').value = feed.city.coords.longitude;
     generateStationReport(feed);
 });
 
@@ -50,10 +60,22 @@ function generateStationReport(pollutionFeed)
 {
     const mainElem = document.querySelector('main');
     
+    Array.from(mainElem.children).forEach(elem =>
+    {
+        if(elem.nodeName != 'TEMPLATE')
+        {
+            elem.remove();
+        }
+    });
+
     if(pollutionFeed.status == 'error')
     {
-        console.log(pollutionFeed);
-        mainElem.innerHTML = pollutionFeed.data;
+        const errorMessage = document.createElement('h2');
+
+        errorMessage.className = 'error-message';
+        errorMessage.innerText = pollutionFeed.data;
+
+        mainElem.appendChild(errorMessage);
         return;
     }
 
@@ -78,6 +100,7 @@ function generateStationReport(pollutionFeed)
     [...pollutants, ...weather].forEach(aqiValue =>
     {
         const newPollutantCard = pollutantCardTemplate.content.cloneNode(true);
+        newPollutantCard.querySelector('.pollutant-card').title = aqiValue.description;
         newPollutantCard.querySelector('.pollutant-name').innerHTML = aqiValue.name;
         newPollutantCard.querySelector('.pollutant-value').innerHTML = aqiValue.value + " " + aqiValue.unit;
         pollutantsGrid.appendChild(newPollutantCard);
@@ -85,11 +108,3 @@ function generateStationReport(pollutionFeed)
 
     mainElem.appendChild(newStationReport);
 }
-
-getCurrentPosition()
-.then(async pos =>
-{
-    const { latitude: lat, longitude: lon } = pos.coords;
-    let feed = await api.getDataByCoords(lat, lon);
-    generateStationReport(feed);
-});
