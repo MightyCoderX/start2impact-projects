@@ -85,10 +85,15 @@ function generateStationReport(pollutionFeed)
     const newStationReport = stationReportTemplate.content.cloneNode(true);
 
     newStationReport.querySelector('.station-name').innerText = pollutionFeed.city.name;
+
     newStationReport.querySelector('.aqi-display').style.borderColor = pollutionFeed.pollutionLevel.color;
     newStationReport.querySelector('.aqi-value').innerText = pollutionFeed.aqi;
     newStationReport.querySelector('.aqi-level').innerText = pollutionFeed.pollutionLevel.name;
     newStationReport.querySelector('.aqi-level').style.color = pollutionFeed.pollutionLevel.color;
+
+    newStationReport.querySelector('.last-updated .value').innerText = pollutionFeed.time.toLocaleString();
+    newStationReport.querySelector('.dominent-pollutant .value').innerHTML = pollutionFeed.dominentPol.name;
+    newStationReport.querySelector('.dominent-pollutant .value').title = pollutionFeed.dominentPol.description;
     
     const pollutantsGrid = newStationReport.querySelector('.pollutants-grid');
 

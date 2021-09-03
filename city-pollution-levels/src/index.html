@@ -35,9 +35,19 @@
             <template id="stationReport">
                 <div class="station-report-container">
                     <h2 class="station-name"></h2>
-                    <div class="aqi-display" title="Air Quality Index">
-                        <p class="aqi-field">AQI - <span class="aqi-value"></span></p>
-                        <p class="aqi-level"></p>
+                    <div class="overview">
+                        <div class="aqi-display card" title="Air Quality Index">
+                            <p class="aqi-field">AQI - <span class="aqi-value"></span></p>
+                            <p class="aqi-level"></p>
+                        </div>
+                        <div class="last-updated card">
+                            <p class="label">Last updated</p>
+                            <div class="value"></div>
+                        </div>
+                        <div class="dominent-pollutant card">
+                            <p class="label">Dominent Pollutant</p>
+                            <div class="value"></div>
+                        </div>
                     </div>
                     <div class="pollutants-grid">
                         <template id="pollutantCard">

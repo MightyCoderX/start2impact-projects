@@ -42,15 +42,16 @@ class PollutionFeed
 {
     constructor(data)
     {
+        const aqiValues = require('../json/aqi-values.json');
         const { aqi, city, dominentpol, iaqi, time } = data;
+
         this._aqi = aqi;
         this._city = new City(city);
-        this._dominentpol = dominentpol;
+        this._dominentPol = aqiValues[dominentpol];
         
         this._pollutants = [];
         this._weather = [];
 
-        const aqiValues = require('../json/aqi-values.json');
 
         for(let key in iaqi)
         {
@@ -65,24 +66,6 @@ class PollutionFeed
                 this._weather.push(aqiValue);
             }
         }
-
-        // fetch('../json/api-values')
-        // .then(res => res.json())
-        // .then(apiValues =>
-        // {
-        //     for(let key of iaqi)
-        //     {
-        //         const value = apiValues[key];
-        //         if(value.type == 'pm' || value.type == 'gas')
-        //         {
-        //             this._pollutants.push(value);
-        //         }
-        //         else if(value.type == 'weather')
-        //         {
-        //             this._weather.push(value);
-        //         }
-        //     }
-        // });
 
         this._time = new Date(time.iso);
         console.log(this);
@@ -119,9 +102,9 @@ class PollutionFeed
         return this._city;
     }
 
-    get dominentpol()
+    get dominentPol()
     {
-        return this._dominentpol;
+        return this._dominentPol;
     }
 
     get pollutants()
