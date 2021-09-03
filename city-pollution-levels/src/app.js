@@ -1,6 +1,6 @@
 const _ = require('lodash');
 
-const { PollutionAPI } = require('./js/pollution-api');
+const PollutionAPI = require('./js/pollution-api');
 const { getCurrentPosition } = require('./js/utils');
 
 const API_TOKEN = process.env.API_TOKEN;
@@ -17,13 +17,21 @@ getCurrentPosition()
 {
     const { latitude: lat, longitude: lon } = pos.coords;
     let feed = await api.getDataByCoords(lat, lon);
+    document.querySelector('header').insertAdjacentHTML('afterend', `
+        <p style="color:white; font-size: 3rem; text-align: center; margin-bottom: 2rem">Nearest station's report</p>
+    `);
     generateStationReport(feed);
+})
+.catch(err =>
+{
+    document.querySelector('main').innerHTML = `
+        <p style="color:red; font-size: 3rem; text-align: center; margin-top: 20vh">Enable GPS to see the nearest station's report!</p>
+    `;
 });
 
 formSearchByCoords.addEventListener('submit', async e =>
 {
     e.preventDefault();
-    console.log(e.type);
 
     const formData = new FormData(e.target);
 
@@ -42,7 +50,6 @@ const formSearchByCity = document.getElementById('formSearchByCity');
 formSearchByCity.addEventListener('submit', async e =>
 {
     e.preventDefault();
-    console.log(e.type);
 
     const formData = new FormData(e.target);
 
